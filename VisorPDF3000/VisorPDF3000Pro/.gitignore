@@ -1,0 +1,34 @@
+# Compilaciones y componentes DLL (no subir a GitHub)
+build/
+dist/
+*.spec
+*.exe
+*.dll
+*.pkg
+*.pyz
+
+# Datos indexados y documentos privados
+Data/
+Data_Respaldo_Compilacion/
+*.pdf
+*.PDF
+*.zip
+*.sqlite3
+*.sqlite3-*
+*.db
+*.db-wal
+*.db-shm
+
+# Entornos y caches de Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.pytest_cache/
+
+# Temporales
+*.log
+*.tmp
+Thumbs.db
+Desktop.ini

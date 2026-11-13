@@ -1,0 +1,31 @@
+GITHUB - POR QUE FALLA EL GIT PUSH Y COMO DEJAR EL REPO LIGERO
+================================================================
+
+El problema anterior: git push intentaba incluir dist/torch/lib/torch_cpu.dll
+(293.52 MB) y archivos internos .pkg/.pyz/.exe.
+
+1) Copia el archivo .gitignore de este ZIP a la carpeta RAIZ del repo PDF
+   (al lado de .git, no solo dentro de VisorPDF3000Pro).
+2) Copia los archivos fuente de esta nueva version al proyecto.
+3) Haz respaldo de tus archivos y revisa: git status
+4) Si GitHub RECHAZO TU PRIMER PUSH y no existe ningun commit remoto
+   que necesites conservar, crea una rama nueva sin el historial pesado.
+   En CMD, en la RAIZ del repo y con cambios locales guardados:
+
+   git branch respaldo-main-antes-limpieza
+   git checkout --orphan main-ligera
+   git rm -r --cached .
+   git add .
+   git status
+   git commit -m "VisorPDF3000 Pro - version ligera"
+   git branch -M main
+   git push -u origin main
+
+   IMPORTANTE: revisa git status antes de commit para confirmar que
+   NO aparezcan build/, dist/, Data/ ni archivos .exe/.dll.
+
+5) Si el repositorio remoto SI tiene commits que otros usan, NO reescribas
+   el historial con esos comandos: se requiere otro procedimiento.
+
+El respaldo de rama protege el historial anterior dentro de tu PC.
+No hagas git push --force para solucionar el error de archivos grandes.
