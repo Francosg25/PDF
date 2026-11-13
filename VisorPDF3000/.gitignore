@@ -1,6 +1,5 @@
 # Compilaciones y componentes DLL (no subir a GitHub)
 build/
-dist/
 *.spec
 *.exe
 *.dll
