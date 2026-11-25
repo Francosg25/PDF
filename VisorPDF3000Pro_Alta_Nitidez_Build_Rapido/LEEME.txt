@@ -1,0 +1,72 @@
+# VisorPDF3000 Pro — Windows 10 y 11
+
+## Función principal
+Busca palabras, frases, nombres, números o referencias **dentro del contenido de los PDF**.
+Los resultados muestran el archivo y el número de página. Al seleccionar un resultado se
+muestra una vista previa de esa página.
+
+## PDF digitales y escaneados
+- PDF digitales: extrae el texto directamente.
+- PDF escaneados: puede aplicar OCR a las páginas que no contienen texto digital.
+- El OCR requiere instalar Tesseract OCR en Windows. Para español instala también el paquete
+  de idioma `spa`; para inglés, `eng`. El programa intenta localizar Tesseract en su ruta habitual.
+- En el programa puedes seleccionar `spa`, `eng` o `spa+eng`.
+
+Descarga Tesseract OCR desde su página oficial/proyecto:
+https://github.com/UB-Mannheim/tesseract/wiki
+
+Durante la instalación, selecciona los idiomas Spanish y/o English. Si Tesseract se instala
+en una ruta distinta, agrega la ruta completa de `tesseract.exe` en:
+Data\config.txt
+como una línea:
+tesseract=C:\Program Files\Tesseract-OCR\tesseract.exe
+
+## Crear la versión portable
+1. En Windows 10/11 instala Python 3.13 desde https://www.python.org/downloads/
+   y marca la opción para agregar Python al PATH.
+2. Extrae este ZIP en una carpeta.
+3. Haz doble clic en `CREAR_PORTABLE.bat`.
+4. Al terminar, el ejecutable estará en `dist\VisorPDF3000Pro\VisorPDF3000Pro.exe`.
+5. Copia toda la carpeta `VisorPDF3000Pro` (no solo el EXE) a tu USB o disco duro.
+
+Este ZIP contiene el código y el creador del ejecutable; el EXE de Windows se compila
+en una computadora Windows mediante el archivo BAT.
+
+## Uso
+1. Abre el programa y elige la carpeta raíz donde están tus PDF.
+2. Pulsa `Indexar / actualizar PDF`. La primera indexación puede tardar según el número,
+   tamaño y cantidad de páginas de los documentos.
+3. Activa `Usar OCR en páginas escaneadas` para reconocer páginas escaneadas.
+4. Escribe la palabra o frase y pulsa `Buscar dentro de los PDF`.
+5. Haz doble clic en el resultado para mostrar la página encontrada.
+6. Usa los botones de página y zoom para navegar.
+
+## Datos y privacidad
+El catálogo e índice de texto se guardan localmente en `Data\catalogo.sqlite3`.
+Los PDF originales no se modifican. El programa no sube documentos a internet.
+
+## Notas
+- Para que una búsqueda encuentre contenido nuevo o modificado, vuelve a indexar la carpeta.
+- La búsqueda es literal y no distingue mayúsculas/minúsculas; por ejemplo, busca `factura`
+  y encuentra `Factura`.
+- La indexación OCR de miles de páginas puede tardar bastante.
+- Si el PDF está protegido, dañado o tiene una imagen ilegible, puede que no se pueda extraer texto.
+
+
+MEJORAS DE INTERFAZ DE ESTA VERSION
+- Tema azul marino, azul claro y blanco.
+- Columna Documento / página más compacta y columna de coincidencia expandible.
+- Zoom ajustable de 50% a 250%, en pasos de 10%.
+- Vista previa desplazable al ampliar una página.
+
+
+VERSION ALTA NITIDEZ
+- Vista previa renderizada a doble resolucion para texto mas nitido.
+- Zoom visual de 50% a 250% sin reescalado borroso.
+- Se evita el renderizado innecesario al cambiar el tamano de la ventana.
+- Para actualizar el EXE, ejecutar CREAR_PORTABLE.bat de nuevo en Windows.
+- Los archivos escaneados originalmente borrosos no pueden recuperar detalles perdidos.
+
+
+BUILD RAPIDO
+El BAT instala dependencias solo si faltan imports, no actualiza pip y reutiliza la cache de PyInstaller. No usa collect-all. Para una compilacion limpia, agrega --clean al comando PyInstaller. Tesseract sigue siendo externo. Respalda Data antes de recompilar si contiene un catalogo existente.
